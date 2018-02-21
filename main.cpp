@@ -8,7 +8,7 @@
 #include <ctime>
 #include <chrono>
 
-#include "functions.hpp"
+#include "Functions.hpp"
 #include "Fractal.hpp"
 
 const double DOMAIN_X_MIN = -2.0;

@@ -12,7 +12,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -ffast-math -fopenmp")
 
-add_executable(${EXECUTABLE_NAME} main.cpp functions.hpp Fractal.hpp Fractal.cpp)
+add_executable(${EXECUTABLE_NAME} main.cpp Functions.hpp Fractal.hpp Fractal.cpp)
 
 #Find Boost
 set(BOOST_LIBS program_options)

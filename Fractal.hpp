@@ -4,7 +4,7 @@
 #include <functional>
 #include <complex>
 #include <SFML/Graphics.hpp>
-#include "functions.hpp"
+#include "Functions.hpp"
 
 struct Domain {
     
