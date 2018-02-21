@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-Fractal::Fractal(int image_width, int image_height, Domain domain, std::function<std::complex<double> (std::complex<double>, std::complex<double>)> fractal_function, std::function<sf::Color(int iteration_number, int max_iterations)> render_function) : domain(domain) {
+Fractal::Fractal(int image_width, int image_height, Domain domain, std::function<int (std::complex<double>, int)> fractal_function, std::function<sf::Color(int, int)> render_function) : domain(domain) {
     this->fractal_function = fractal_function;
     this->render_function = render_function;
     this->image_height = image_height;
@@ -12,7 +12,7 @@ Fractal::Fractal(int image_width, int image_height, Domain domain, std::function
     this->hasChanged = true;
 }
 
-void Fractal::setFractalFunction(std::function<std::complex<double> (std::complex<double>, std::complex<double>)> fractal_function) {
+void Fractal::setFractalFunction(std::function<int (std::complex<double>, int)> fractal_function) {
     this->fractal_function = fractal_function;
     this->hasChanged = true;
 }
@@ -20,20 +20,6 @@ void Fractal::setFractalFunction(std::function<std::complex<double> (std::comple
 void Fractal::setRenderFunction(std::function<sf::Color (int iteration_number, int max_iterations)> render_function) {
     this->render_function = render_function;
     this->hasChanged = true;
-}
-
-int Fractal::compute_point(std::complex<double> point, int max_iterations) {
-    
-    std::complex<double> z(0);
-    int iter = 0;
-    
-    while (abs(z) < 2.0 && iter < max_iterations) {
-        z = this->fractal_function(z, point);
-        iter++;
-    }
-
-    return iter;
-    
 }
 
 std::complex<double> Fractal::scale_point(std::complex<double> point) {
@@ -54,7 +40,7 @@ sf::Image Fractal::getFrame(){
             for(int x = 0; x < this->image_width; x++) {
                 std::complex<double> point(x, y);
                 point = scale_point(point);
-                int iterations = compute_point(point, max_iterations);
+                int iterations = this->fractal_function(point, max_iterations);
                 sf::Color color = this->render_function(iterations, max_iterations);
                 this->frame.setPixel(x, y, color);
             }  

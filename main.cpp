@@ -192,22 +192,22 @@ int main(int argc, char **argv) {
                         // Fractal selection
                         case sf::Keyboard::Key::Num1:
                             std::cerr << "Selected mandelbrot algorithm" << std::endl;
-                            mandelbrot.setFractalFunction(fractal_mandelbrot);
+                            mandelbrot.setFractalFunction(fractal_function_template<fractal_mandelbrot>);
                             break;
                             
                         case sf::Keyboard::Key::Num2:
                             std::cerr << "Selected triple mandelbrot algorithm" << std::endl;
-                            mandelbrot.setFractalFunction(fractal_triple_mandelbrot);
+                            mandelbrot.setFractalFunction(fractal_function_template<fractal_triple_mandelbrot>);
                             break;
                             
                         case sf::Keyboard::Key::Num3:
                             std::cerr << "Selected quadruple mandelbrot algorithm" << std::endl;
-                            mandelbrot.setFractalFunction(fractal_quadruple_mandelbrot);
+                            mandelbrot.setFractalFunction(fractal_function_template<fractal_quadruple_mandelbrot>);
                             break;
                             
                         case sf::Keyboard::Key::Num4:
                             std::cerr << "Selected quintuple mandelbrot algorithm" << std::endl;
-                            mandelbrot.setFractalFunction(fractal_quintuple_mandelbrot);
+                            mandelbrot.setFractalFunction(fractal_function_template<fractal_quintuple_mandelbrot>);
                             break;
                             
                         default:

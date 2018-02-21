@@ -4,6 +4,23 @@
 #include <complex>
 #include <SFML/Graphics.hpp>
 
+typedef std::complex<double> (*fractal_function)(std::complex<double>, std::complex<double>);
+
+template <fractal_function F>
+int fractal_function_template(std::complex<double> point, int max_iterations) {
+    
+    std::complex<double> z(0);
+    int iter = 0;
+    
+    while (abs(z) < 2.0 && iter < max_iterations) {
+        z = F(z, point);
+        iter++;
+    }
+
+    return iter;
+    
+}
+
 inline std::complex<double> fractal_mandelbrot(std::complex<double> z, std::complex<double> c) {
    return (z * z) + c; 
 }

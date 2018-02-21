@@ -83,14 +83,13 @@ class Fractal {
 private:
     
     int image_width, image_height;
-    std::function<std::complex<double>(std::complex<double>, std::complex<double>)> fractal_function;
-    std::function<sf::Color(int iteration_number, int max_iterations)> render_function;
+    std::function<int (std::complex<double>, int)> fractal_function;
+    std::function<sf::Color(int, int)> render_function;
     sf::Image frame;
     bool hasChanged;
     Domain domain;
     
     std::complex<double> scale_point(std::complex<double> point);
-    int compute_point(std::complex<double> point, int max_iterations);
     int compute_max_iterations(int window_width, double domain_width);
     
 public:
@@ -98,13 +97,13 @@ public:
     Fractal(int image_width,
             int image_height,
             Domain domain,
-            std::function<std::complex<double>(std::complex<double>, std::complex<double>)> fractal_function = fractal_mandelbrot,
-            std::function<sf::Color(int iteration_number, int max_iterations)> render_function = render_smooth
+            std::function<int (std::complex<double>, int)> fractal_function = fractal_function_template<fractal_mandelbrot>,
+            std::function<sf::Color(int, int)> render_function = render_smooth
            );
     
-    void setFractalFunction(std::function<std::complex<double>(std::complex<double>, std::complex<double>)> fractal_function);
+    void setFractalFunction(std::function<int (std::complex<double>, int)> fractal_function);
     
-    void setRenderFunction(std::function<sf::Color(int iteration_number, int max_iterations)> render_function);
+    void setRenderFunction(std::function<sf::Color(int, int)> render_function);
     
     void moveTo(int x, int y);
     
