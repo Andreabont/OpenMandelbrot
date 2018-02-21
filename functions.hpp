@@ -7,7 +7,7 @@
 typedef std::complex<double> (*fractal_function)(std::complex<double>, std::complex<double>);
 
 template <fractal_function F>
-int fractal_function_template(std::complex<double> point, int max_iterations) {
+int fractal_function_template(const std::complex<double>& point, const int& max_iterations) {
     
     std::complex<double> z(0);
     int iter = 0;

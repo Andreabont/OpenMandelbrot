@@ -63,7 +63,7 @@ struct Domain {
         
     }
     
-    void centralize(std::complex<double> point) {
+    void centralize(const std::complex<double>& point) {
 
         double x_frac = width() / 2;
         double y_frac = height() / 2;
@@ -88,9 +88,15 @@ private:
     sf::Image frame;
     bool hasChanged;
     Domain domain;
+        
+    inline std::complex<double> scale_point(const std::complex<double>& point) {
+        return std::complex<double>(point.real() / (double)this->image_width * this->domain.width() + this->domain.x_min, point.imag() / (double)this->image_height * this->domain.height() + domain.y_min);
+    }
     
-    std::complex<double> scale_point(std::complex<double> point);
-    int compute_max_iterations(int window_width, double domain_width);
+    inline int compute_max_iterations(const int& window_width, const double& domain_width) {
+        int max = 50 * std::pow(std::log10(window_width / domain_width), 1.25);
+        return (max > 0)? max : 0;
+    }
     
 public:
     

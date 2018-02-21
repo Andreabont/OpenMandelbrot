@@ -22,11 +22,6 @@ void Fractal::setRenderFunction(std::function<sf::Color (int iteration_number, i
     this->hasChanged = true;
 }
 
-std::complex<double> Fractal::scale_point(std::complex<double> point) {
-    std::complex<double> aux(point.real() / (double)this->image_width * this->domain.width() + this->domain.x_min, point.imag() / (double)this->image_height * this->domain.height() + domain.y_min);
-    return aux;
-}
-
 sf::Image Fractal::getFrame(){
     
     if (this->hasChanged) {
@@ -60,7 +55,7 @@ sf::Image Fractal::getFrame(){
 
 void Fractal::moveTo(int x, int y) {
     std::complex<double> point(x, y);
-    point = this->scale_point(point);
+    point = scale_point(point);
     this->domain.centralize(point);
     this->hasChanged = true;
 }
@@ -73,11 +68,6 @@ void Fractal::moveBy(double x, double y) {
 void Fractal::zoom(double factor, bool invert) {
     this->domain.zoom((invert)?1/factor:factor);
     this->hasChanged = true;
-}
-
-int Fractal::compute_max_iterations(int window_width, double domain_width) {
-    int max = 50 * std::pow(std::log10(window_width / domain_width), 1.25);
-    return (max > 0)? max : 0;
 }
 
 
